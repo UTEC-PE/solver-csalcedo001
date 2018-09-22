@@ -1,7 +1,20 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <cctype>
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
 // TODO: Change switch for map
+#ifndef DEF_MAP
+#define DEF_MAP
+
+map <string, float> def;
+
+#endif
 
 int op_value (char c) {
     switch(c) {
@@ -30,7 +43,7 @@ float operate (char op, float x) {
         case '-':
             return -x;
         default:
-            return 0; // TODO: throw error
+            throw 1;
     }
 }
 
@@ -47,8 +60,17 @@ float operate (char op, float x, float y) {
         case '^':
             return pow(x, y);
         default:
-            return 0; // TODO: throw error
+            throw 0;
     }
+}
+
+//TODO: Check invalid variable names
+bool constant_q(char *s) {
+    for (int i = 0; s[i] != '\0'; i++)
+        if (!isdigit(s[i]) && s[i] != '.')
+          return false;
+
+    return true;
 }
 
 #endif

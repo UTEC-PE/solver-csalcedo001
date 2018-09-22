@@ -5,6 +5,13 @@
 
 #include "functions.h"
 
+#ifndef DEF_MAP
+#define DEF_MAP
+
+map <string, float> def;
+
+#endif
+
 using namespace std;
 
 struct Node {
@@ -131,15 +138,25 @@ struct Node {
 
             *end = '\0';
 
-            double result = atof(begin);
+            if (constant_q(begin)) {
+                double result = atof(begin);
 
-            *end = tmp;
+                *end = tmp;
 
-            return result;
+                return result;
+            } else if (!def.empty() && def.find(begin) != def.end()) {
+                double result = def[begin];
+
+                *end = tmp;
+
+                return result;
+            }
+
+            throw 0; // Undefined variable
         }
 
         if (!right)
-            return 0; //TODO: throw
+            throw 1; // Invalid expression
 
         if (!left)
             return operate(op_type, right->solve());
