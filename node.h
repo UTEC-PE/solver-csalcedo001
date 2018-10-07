@@ -29,7 +29,7 @@ struct Node {
         left = right = nullptr;
 
         // Errase spaces in the beginning of the string
-        while (*begin == ' ' && begin < end)
+        while (*begin == ' ' && begin < end) // Esto podrías sacarlo y crear una función trim() 
             begin++;
 
         // Errase spaces at the end of the string
